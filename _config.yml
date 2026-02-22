@@ -1,0 +1,19 @@
+title: حامل الهداة
+description: Upholding the Athār and the Creed of the Salaf
+baseurl: ""                     # Important for user site
+url: "https://hamelal.github.io"
+
+theme: minima                   # GitHub's built-in minimal theme (very clean)
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections (optional but useful later)
+collections:
+  articles:
+    output: true
+    permalink: /:collection/:name/
