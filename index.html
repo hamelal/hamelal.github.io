@@ -41,11 +41,67 @@
       color: #ccc;
       text-decoration: none;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.2s ease;
     }
     .nav-left a:hover {
       color: #f5f5f5;
       text-shadow: 0 0 6px rgba(255,255,255,0.15);
+    }
+    .nav-left img {
+      width: 20px;
+      height: 20px;
+      filter: brightness(1.3);
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ccc;
+      font-weight: 500;
+    }
+    .dropdown-toggle:hover {
+      color: #f5f5f5;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      min-width: 180px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      z-index: 999;
+      margin-top: 8px;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-item {
+      padding: 10px 16px;
+      color: #ccc;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .dropdown-item:hover {
+      background: #222;
+      color: #fff;
+    }
+    .dropdown-item img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(1.3);
     }
     .topbar-right {
       display: flex;
@@ -114,9 +170,9 @@
     header {
       position: relative;
       border-bottom: 1px solid #333;
-      padding: 30px 20px 20px; /* smaller padding */
+      padding: 45px 20px 35px; /* slightly bigger */
       text-align: center;
-      min-height: 220px; /* smaller rectangular height */
+      min-height: 300px; /* bigger rectangle */
       background: #000;
       overflow: hidden;
     }
@@ -144,10 +200,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
     .header-title img {
-      width: 200px; /* adjusted for smaller header */
+      width: 240px;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.7);
     }
@@ -224,6 +280,7 @@
       font-size: 13.5px;
       color: #aaa;
       margin-bottom: 10px;
+      font-family: system-ui, sans-serif; /* default font for calendar/date */
     }
     .article-meta img { width: 14px; filter: brightness(1.4); }
     aside {
@@ -305,17 +362,37 @@
     }
     @media (max-width: 860px) {
       .container { grid-template-columns: 1fr; }
-      .header-title img { width: 160px; }
+      .header-title img { width: 180px; }
       .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
+      .dropdown-menu { left: auto; right: 0; }
     }
   </style>
 </head>
 <body>
   <div class="topbar" id="topbar">
     <div class="nav-left">
-      <a href="#">Home</a>
-      <a href="#">Articles</a>
+      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/home-page-white-icon.webp" alt="Home">Home</a>
+      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/report-3-xxl.png" alt="Articles">Articles</a>
+
+      <div class="dropdown">
+        <div class="dropdown-toggle">More</div>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">
+            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-stack-xxl.png?raw=true" alt="Lessons">
+            Lesson & Studies
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="Excerpts">
+            Excerpts of Knowledge
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="Audios">
+            Audios
+          </a>
+        </div>
+      </div>
     </div>
+
     <div class="topbar-right">
       <div class="social-icons">
         <a href="https://discord.com/users/1401569195388440637"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
@@ -370,46 +447,13 @@
   <div id="backToTop" title="Back to top">↑</div>
 
   <script>
-    // Fallback sample articles so you see content even if articles.json is missing
-    const fallbackArticles = [
-      {
-        title: "Sample Article 1 – Advice from the Salaf",
-        date: "2026-02-10",
-        excerpt: "This is a placeholder article. Once you add real articles.json, this will be replaced.",
-        file: "#"
-      },
-      {
-        title: "Sample Article 2 – Importance of Athār",
-        date: "2026-01-28",
-        excerpt: "Another example post. Replace with your real content by uploading articles.json.",
-        file: "#"
-      },
-      {
-        title: "Sample Article 3 – Manhaj Clarification",
-        date: "2025-12-15",
-        excerpt: "You should now see at least these samples. Add your JSON file to show real posts.",
-        file: "#"
-      }
-    ];
-
     let articlesData = [];
-
-    // Try to load real data, fall back to samples if failed
     fetch("/articles.json")
-      .then(r => {
-        if (!r.ok) throw new Error("articles.json not found or invalid");
-        return r.json();
-      })
+      .then(r => r.json())
       .then(d => {
         articlesData = d;
         renderArticles(d);
         renderRecent(d);
-      })
-      .catch(() => {
-        articlesData = fallbackArticles;
-        renderArticles(fallbackArticles);
-        renderRecent(fallbackArticles);
-        console.log("Using fallback articles – upload articles.json to show real ones");
       });
 
     function hijriDate(g) {
@@ -421,10 +465,6 @@
     function renderArticles(list) {
       const c = document.getElementById("articlesList");
       c.innerHTML = "";
-      if (list.length === 0) {
-        c.innerHTML = '<p style="text-align:center; color:#888;">No articles yet – add articles.json</p>';
-        return;
-      }
       list.sort((a,b) => new Date(b.date) - new Date(a.date))
         .forEach(a => {
           const d = document.createElement("div");
@@ -435,7 +475,7 @@
               <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png">
               <span>${hijriDate(a.date)}</span>
             </div>
-            <p>${a.excerpt} <a class="read-more" href="${a.file || '#'}">Read more »</a></p>
+            <p>${a.excerpt}</p>
           `;
           c.appendChild(d);
         });
