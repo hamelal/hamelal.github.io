@@ -41,7 +41,7 @@
       font-size: 0.95rem;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .nav-left a {
+    .nav-left a, .dropdown-toggle {
       color: #ccc;
       text-decoration: none;
       font-weight: 500;
@@ -51,32 +51,22 @@
       padding: 6px 12px;
       border-radius: 6px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
-    .nav-left a:hover {
+    .nav-left a:hover, .dropdown-toggle:hover {
       color: #f5f5f5;
       background: rgba(255,255,255,0.06);
+    }
+    .nav-left img, .dropdown-toggle img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(1.3);
     }
     .dropdown {
       position: relative;
     }
     .dropdown-checkbox {
       display: none;
-    }
-    .dropdown-toggle {
-      color: #ccc;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .dropdown-toggle:hover {
-      color: #f5f5f5;
-      background: rgba(255,255,255,0.06);
     }
     .dropdown-toggle::after {
       content: "▼";
@@ -90,11 +80,6 @@
     .dropdown-checkbox:checked + .dropdown-toggle {
       background: rgba(255,255,255,0.08);
       color: #fff;
-    }
-    .nav-left img, .dropdown-toggle img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(1.3);
     }
     .dropdown-menu {
       position: absolute;
@@ -110,10 +95,7 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-12px) scale(0.95);
-      transition:
-        opacity 0.22s ease,
-        visibility 0.22s ease,
-        transform 0.22s ease;
+      transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
       pointer-events: none;
     }
     .dropdown-checkbox:checked ~ .dropdown-menu {
@@ -140,6 +122,7 @@
       height: 18px;
       filter: brightness(1.3);
     }
+
     .topbar-right {
       display: flex;
       align-items: center;
@@ -250,9 +233,12 @@
       align-items: center;
       justify-content: center;
       background: #222;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
       transition: all 0.2s ease;
     }
     .social-icons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
       background: #333;
     }
     .social-icons img { width: 18px; filter: brightness(1.3); }
@@ -288,8 +274,11 @@
       opacity: 0;
       animation: fadeIn 0.6s forwards;
       transition: all 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
-    @keyframes fadeIn { to { opacity:1; } }
     .article:hover {
       background: #222;
       box-shadow: 0 4px 16px rgba(255,255,255,0.06);
@@ -362,6 +351,7 @@
     .footer-social a:hover {
       opacity: 1;
       transform: translateY(-4px);
+      filter: drop-shadow(0 4px 12px rgba(255,255,255,0.15));
     }
     .footer-social img {
       width: 32px;
@@ -494,10 +484,18 @@
     </div>
     <div class="topbar-right">
       <div class="social-icons">
-        <a href="https://discord.com/users/1401569195388440637"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
-        <a href="https://www.instagram.com/hamelal.hudaa/"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram"></a>
-        <a href="https://www.youtube.com/@hamelaalhuda"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube"></a>
-        <a href="https://t.me/hamelalhuda"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram"></a>
+        <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
+        </a>
+        <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
+        </a>
+        <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
+        </a>
       </div>
       <div class="search-area">
         <div class="search-box">
@@ -536,10 +534,18 @@
 
   <footer>
     <div class="footer-social">
-      <a href="https://discord.com/users/1401569195388440637"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
-      <a href="https://www.instagram.com/hamelal.hudaa/"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram"></a>
-      <a href="https://www.youtube.com/@hamelaalhuda"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube"></a>
-      <a href="https://t.me/hamelalhuda"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram"></a>
+      <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
+      </a>
+      <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
+      </a>
+      <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
+      </a>
+      <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
+      </a>
     </div>
     <div class="footer-text">
       © حامل الهداة
@@ -551,6 +557,7 @@
   </div>
 
   <script>
+    // First-time header animation
     window.addEventListener('load', () => {
       const header = document.getElementById('headerTitle');
       setTimeout(() => {
@@ -587,9 +594,12 @@
         .filter(a => a && a.title && a.date && a.excerpt)
         .sort((a,b) => new Date(b.date) - new Date(a.date))
         .forEach(a => {
-          const d = document.createElement("div");
-          d.className = "article";
-          d.innerHTML = `
+          const articleDiv = document.createElement("div");
+          articleDiv.className = "article";
+          
+          // Make whole card clickable
+          const link = a.file || '#';
+          articleDiv.innerHTML = `
             <div class="article-title">${a.title}</div>
             <div class="article-meta">
               <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png">
@@ -597,7 +607,12 @@
             </div>
             <p>${a.excerpt}</p>
           `;
-          c.appendChild(d);
+          
+          articleDiv.addEventListener('click', () => {
+            window.location.href = link;
+          });
+
+          c.appendChild(articleDiv);
         });
     }
 
