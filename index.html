@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Al-hameela Huda</title>
+  <title>حامل الهداة</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@
       font-size: 0.95rem;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .nav-left a {
+    .nav-left a, .dropdown-toggle {
       color: #ccc;
       text-decoration: none;
       font-weight: 500;
@@ -51,32 +51,22 @@
       padding: 6px 12px;
       border-radius: 6px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
-    .nav-left a:hover {
+    .nav-left a:hover, .dropdown-toggle:hover {
       color: #f5f5f5;
       background: rgba(255,255,255,0.06);
+    }
+    .nav-left img, .dropdown-toggle img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(1.3);
     }
     .dropdown {
       position: relative;
     }
     .dropdown-checkbox {
       display: none;
-    }
-    .dropdown-toggle {
-      color: #ccc;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .dropdown-toggle:hover {
-      color: #f5f5f5;
-      background: rgba(255,255,255,0.06);
     }
     .dropdown-toggle::after {
       content: "▼";
@@ -90,11 +80,6 @@
     .dropdown-checkbox:checked + .dropdown-toggle {
       background: rgba(255,255,255,0.08);
       color: #fff;
-    }
-    .nav-left img, .dropdown-toggle img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(1.3);
     }
     .dropdown-menu {
       position: absolute;
@@ -110,10 +95,7 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-12px) scale(0.95);
-      transition: 
-        opacity 0.22s ease,
-        visibility 0.22s ease,
-        transform 0.22s ease;
+      transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
       pointer-events: none;
     }
     .dropdown-checkbox:checked ~ .dropdown-menu {
@@ -380,26 +362,35 @@
 
     #backToTop {
       position: fixed;
-      bottom: 22px;
-      right: 22px;
-      width: 46px;
-      height: 46px;
-      background: #1a5c5c;
-      color: white;
-      border-radius: 50%;
+      bottom: 32px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      background: #222;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s;
-      font-size: 1.45rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
       z-index: 999;
     }
+    #backToTop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
+      background: #333;
+    }
     #backToTop.visible {
-      opacity: 0.9;
+      opacity: 0.95;
       visibility: visible;
+    }
+    #backToTop img {
+      width: 28px;
+      height: 28px;
+      filter: brightness(1.4);
     }
 
     @media (max-width: 860px) {
@@ -408,6 +399,13 @@
       .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
       .dropdown-menu { left: 50%; transform: translateX(-50%) translateY(-12px) scale(0.95); width: 90%; max-width: 260px; }
       .dropdown-checkbox:checked ~ .dropdown-menu { transform: translateX(-50%) translateY(0) scale(1); }
+      #backToTop {
+        bottom: 24px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+      }
+      #backToTop img { width: 26px; height: 26px; }
     }
   </style>
 </head>
@@ -416,7 +414,6 @@
     <div class="nav-left">
       <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/home-page-white-icon.webp" alt="">Home</a>
       <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/report-3-xxl.png" alt="">Articles</a>
-
       <div class="dropdown">
         <input type="checkbox" id="dd-lessons" class="dropdown-checkbox" hidden>
         <label for="dd-lessons" class="dropdown-toggle">
@@ -434,7 +431,6 @@
           </a>
         </div>
       </div>
-
       <div class="dropdown">
         <input type="checkbox" id="dd-excerpts" class="dropdown-checkbox" hidden>
         <label for="dd-excerpts" class="dropdown-toggle">
@@ -456,7 +452,6 @@
           </a>
         </div>
       </div>
-
       <div class="dropdown">
         <input type="checkbox" id="dd-audios" class="dropdown-checkbox" hidden>
         <label for="dd-audios" class="dropdown-toggle">
@@ -483,7 +478,6 @@
         </div>
       </div>
     </div>
-
     <div class="topbar-right">
       <div class="social-icons">
         <a href="https://discord.com/users/1401569195388440637"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
@@ -506,7 +500,7 @@
   <header>
     <div class="header-inner">
       <div class="header-title" id="headerTitle">
-        <img src="https://raw.githubusercontent.com/hamelal/hamelal/refs/heads/main/Index%20-%20Header/hamelal.png" alt="Al-hameela Huda">
+        <img src="https://raw.githubusercontent.com/hamelal/hamelal/refs/heads/main/Index%20-%20Header/hamelal.png" alt="حامل الهداة">
         <div class="site-subtitle">
           Islamic books – Benefits from the Salaf – Audio lessons – Articles – Excerpts from the words of the scholars
         </div>
@@ -534,11 +528,13 @@
       <a href="https://t.me/hamelalhuda"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram"></a>
     </div>
     <div class="footer-text">
-      © Hameela
+      © حامل الهداة
     </div>
   </footer>
 
-  <div id="backToTop" title="Back to top">↑</div>
+  <div id="backToTop" title="Back to top">
+    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/arrow-up-6-xxl.png" alt="Back to top">
+  </div>
 
   <script>
     // First-time header animation
@@ -546,7 +542,7 @@
       const header = document.getElementById('headerTitle');
       setTimeout(() => {
         header.classList.add('animate-on-load');
-      }, 300); // small delay for smoother entrance
+      }, 300);
     });
 
     let articlesData = [];
