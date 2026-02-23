@@ -6,18 +6,21 @@
   <title>حامل الهداة</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: "Cormorant Garamond", serif;
       background: #0f0f0f;
       color: #e0e0e0;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f0f0f; }
     ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #555; }
+    html { scrollbar-width: thin; scrollbar-color: #333 #0f0f0f; }
+    body { overflow-x: hidden; }
 
     .topbar {
       display: flex;
@@ -34,8 +37,9 @@
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       font-size: 0.95rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     .nav-left a, .dropdown-toggle {
       color: #ccc;
@@ -44,12 +48,13 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 6px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
     .nav-left a:hover, .dropdown-toggle:hover {
-      color: #fff;
+      color: #f5f5f5;
       background: rgba(255,255,255,0.06);
     }
     .nav-left img, .dropdown-toggle img {
@@ -57,140 +62,353 @@
       height: 18px;
       filter: brightness(1.3);
     }
-
-    /* Dropdown styles unchanged – keeping compact */
-    .dropdown { position: relative; }
-    .dropdown-checkbox { display: none; }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-checkbox {
+      display: none;
+    }
     .dropdown-toggle::after {
-      content: "▼"; font-size: 0.7em; margin-left: 5px;
+      content: "▼";
+      font-size: 0.7em;
+      margin-left: 5px;
       transition: transform 0.25s ease;
     }
-    .dropdown-checkbox:checked + .dropdown-toggle::after { transform: rotate(180deg); }
+    .dropdown-checkbox:checked + .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+    .dropdown-checkbox:checked + .dropdown-toggle {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
     .dropdown-menu {
-      position: absolute; top: 100%; left: 0; margin-top: 6px;
-      background: #1a1a1a; border: 1px solid #333; border-radius: 6px;
-      min-width: 200px; box-shadow: 0 8px 20px rgba(0,0,0,0.65);
-      opacity: 0; visibility: hidden; transform: translateY(-8px) scale(0.97);
-      transition: all 0.22s ease; pointer-events: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 8px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      min-width: 220px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.65);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px) scale(0.95);
+      transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
     }
     .dropdown-checkbox:checked ~ .dropdown-menu {
-      opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
     .dropdown-item {
-      padding: 8px 14px; color: #ccc; display: flex; align-items: center; gap: 10px;
-      text-decoration: none; transition: background 0.2s;
-    }
-    .dropdown-item:hover { background: #222; }
-
-    .topbar-right { display: flex; align-items: center; gap: 14px; }
-    .search-box input {
-      width: 220px; height: 34px; padding: 6px 12px;
-      border-radius: 8px 0 0 8px; border: 1px solid #444; border-right: none;
-      background: #1a1a1a; color: #ddd; font-size: 0.95rem;
-      transition: width 0.35s ease;
-    }
-    .search-box input:focus { width: 300px; outline: none; }
-    .search-icon {
-      width: 40px; height: 34px; background: #222; border: 1px solid #444; border-left: none;
-      border-radius: 0 8px 8px 0; display: flex; align-items: center; justify-content: center;
+      padding: 10px 16px;
+      color: #ccc;
       cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .dropdown-item:hover {
+      background: #222;
+    }
+    .dropdown-item img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(1.3);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .search-area {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+    .search-box input {
+      width: 240px;
+      height: 36px;
+      padding: 8px 12px;
+      border-radius: 8px 0 0 8px;
+      border: 1px solid #444;
+      border-right: none;
+      background: #1a1a1a;
+      color: #ddd;
+      transition: width 0.35s ease, box-shadow 0.3s;
+      font-size: 0.95rem;
+    }
+    .search-box input:focus {
+      width: 320px;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+      outline: none;
+    }
+    .search-icon {
+      width: 42px;
+      height: 36px;
+      border-radius: 0 8px 8px 0;
+      background: #222;
+      border: 1px solid #444;
+      border-left: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
     .search-icon:hover { background: #2a2a2a; }
+    .search-icon:active { transform: scale(0.94); }
     .search-icon img { width: 18px; filter: brightness(1.4); }
 
     header {
-      position: relative; border-bottom: 1px solid #333;
-      padding: 50px 20px 35px; text-align: center; background: #000;
+      position: relative;
+      border-bottom: 1px solid #333;
+      padding: 60px 20px 40px;
+      text-align: center;
+      min-height: 300px;
+      background: #000;
+      overflow: hidden;
     }
     header::before {
-      content: ""; position: absolute; inset: 0;
-      background: url("https://github.com/hamelal/hamelal/blob/main/Index%20-%20Header/Islamic%20books.jpg?raw=true") center/cover;
-      opacity: 0.22;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://github.com/hamelal/hamelal/blob/main/Index%20-%20Header/Islamic%20books.jpg?raw=true") center/cover no-repeat;
+      opacity: 0.24;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.08);
+      z-index: 1;
+    }
+    .header-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: auto;
+      z-index: 2;
     }
     .header-title {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 1.2s ease, transform 1.2s ease;
     }
-    .header-title img { width: 240px; border-radius: 8px; }
+    .header-title.animate-on-load {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .header-title img {
+      width: 260px;
+      border-radius: 8px;
+    }
     .site-subtitle {
-      font-size: 1.1rem; color: #ccc; max-width: 640px; margin: 0 auto;
+      font-size: 1.15rem;
+      color: #bbb;
+      max-width: 680px;
+      margin: 0 auto;
+      font-family: "Cormorant Garamond", serif;
     }
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .social-icons a {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #222;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+    .social-icons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
+      background: #333;
+    }
+    .social-icons img { width: 18px; filter: brightness(1.3); }
 
     .container {
-      max-width: 1150px; margin: 25px auto; padding: 0 16px;
-      display: grid; grid-template-columns: 1fr 240px; gap: 20px;
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 20px;
     }
-    main { background: #111; border: 1px solid #333; border-radius: 10px; padding: 18px; }
+    main {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+    }
     main h2 {
-      font-family: "Amiri", serif; font-size: 24px; margin-bottom: 16px;
-      color: #d0d0d0; border-bottom: 1px solid #444; padding-bottom: 6px;
+      font-family: "Amiri", serif;
+      font-size: 26px;
+      margin-bottom: 18px;
+      color: #d0d0d0;
+      border-bottom: 1px solid #444;
+      padding-bottom: 8px;
     }
-
     .article {
-      padding: 14px 16px;
+      padding: 16px;
       border-radius: 8px;
       background: #1a1a1a;
       border: 1px solid #2a2a2a;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
       transition: all 0.2s ease;
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
     .article:hover {
       background: #222;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 12px rgba(255,255,255,0.04);
+      box-shadow: 0 4px 16px rgba(255,255,255,0.06);
+      transform: translateY(-2px);
     }
     .article-title {
-      color: #ddd; font-size: 19px; margin-bottom: 6px; line-height: 1.35;
+      color: #ccc;
+      font-size: 21px;
+      margin-bottom: 8px;
     }
     .article-meta {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 13px; color: #999; margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #aaa;
+      margin-bottom: 10px;
+      font-family: system-ui, sans-serif;
     }
-    .article-meta img { width: 13px; filter: brightness(1.4); }
-    .article p {
-      font-size: 0.96rem; color: #bbb; margin: 0;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
+    .article-meta img { width: 14px; filter: brightness(1.4); }
 
     aside {
-      background: #111; border: 1px solid #333; border-radius: 10px; padding: 16px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
     }
-    aside h3 { font-family: "Amiri", serif; font-size: 21px; margin-bottom: 12px; color: #d0d0d0; }
+    aside h3 {
+      font-family: "Amiri", serif;
+      font-size: 22px;
+      margin-bottom: 14px;
+      color: #d0d0d0;
+    }
     .nav-item {
-      padding: 8px 12px; margin-bottom: 6px; border-radius: 6px;
-      background: #1a1a1a; border: 1px solid #2a2a2a; color: #ccc;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
       transition: all 0.2s ease;
+      cursor: pointer;
+      color: #ccc;
     }
     .nav-item:hover {
-      background: #222; transform: translateY(-1px);
+      background: #222;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.08);
+      transform: translateY(-2px);
     }
 
     footer {
-      margin-top: 50px; padding: 35px 20px 25px; text-align: center;
+      margin-top: 60px;
+      padding: 40px 20px 30px;
+      text-align: center;
       background: linear-gradient(to top, #0a0a0a, #111);
-      border-top: 1px solid #333; color: #bbb; font-size: 14px;
+      border-top: 1px solid #333;
+      color: #bbb;
+      font-size: 15px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
     }
-    .footer-social { margin: 12px 0 10px; display: flex; justify-content: center; gap: 18px; }
-    .footer-social a:hover { transform: translateY(-3px); }
+    .footer-social {
+      margin: 16px 0 12px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .footer-social a {
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    .footer-social a:hover {
+      opacity: 1;
+      transform: translateY(-4px);
+      filter: drop-shadow(0 4px 12px rgba(255,255,255,0.15));
+    }
+    .footer-social img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(1.3);
+    }
+    .footer-text {
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
 
     #backToTop {
-      position: fixed; bottom: 32px; right: 24px;
-      width: 44px; height: 44px; background: #222; border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0; visibility: hidden;
-      transition: background 0.25s ease; z-index: 999;
+      position: fixed;
+      bottom: 32px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: #222;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: background 0.25s ease;
+      z-index: 999;
     }
-    #backToTop:hover { background: #444; }
-    #backToTop.visible { opacity: 0.92; visibility: visible; }
-    #backToTop img { width: 24px; height: 24px; filter: brightness(1.3); }
+    #backToTop:hover {
+      background: #444;
+    }
+    #backToTop.visible {
+      opacity: 0.92;
+      visibility: visible;
+    }
+    #backToTop img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(1.3);
+      transition: filter 0.25s ease;
+    }
+    #backToTop:hover img {
+      filter: brightness(1.6);
+    }
 
     @media (max-width: 860px) {
       .container { grid-template-columns: 1fr; }
-      .header-title img { width: 210px; }
-      .nav-left { flex-wrap: wrap; gap: 14px; justify-content: center; }
-      #backToTop { bottom: 24px; right: 20px; width: 40px; height: 40px; }
+      .header-title img { width: 220px; }
+      .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
+      .dropdown-menu { left: 50%; transform: translateX(-50%) translateY(-12px) scale(0.95); width: 90%; max-width: 260px; }
+      .dropdown-checkbox:checked ~ .dropdown-menu { transform: translateX(-50%) translateY(0) scale(1); }
+      #backToTop {
+        bottom: 24px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
       #backToTop img { width: 22px; height: 22px; }
     }
   </style>
@@ -200,7 +418,6 @@
     <div class="nav-left">
       <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/home-page-white-icon.webp" alt="">Home</a>
       <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/report-3-xxl.png" alt="">Articles</a>
-      <!-- dropdowns unchanged -->
       <div class="dropdown">
         <input type="checkbox" id="dd-lessons" class="dropdown-checkbox" hidden>
         <label for="dd-lessons" class="dropdown-toggle">
@@ -208,19 +425,77 @@
           Lesson & Studies
         </label>
         <div class="dropdown-menu">
-          <a href="#" class="dropdown-item"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png" alt="">Book library</a>
-          <a href="#" class="dropdown-item"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/folder-7-xxl.png" alt="">Benefits Playlist</a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png" alt="">
+            Book library
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/folder-7-xxl.png" alt="">
+            Benefits Playlist
+          </a>
         </div>
       </div>
-      <!-- other dropdowns the same -->
+      <div class="dropdown">
+        <input type="checkbox" id="dd-excerpts" class="dropdown-checkbox" hidden>
+        <label for="dd-excerpts" class="dropdown-toggle">
+          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="">
+          Excerpts of Knowledge
+        </label>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">
+            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/4324764.png?raw=true" alt="">
+            Gems of the Salaf & Ulamas
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-xxl.png?raw=true" alt="">
+            Books excerpt & Notes
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="">
+            Recording Transcription
+          </a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <input type="checkbox" id="dd-audios" class="dropdown-checkbox" hidden>
+        <label for="dd-audios" class="dropdown-toggle">
+          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="">
+          Audios
+        </label>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png" alt="">
+            Book reading/recitation
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="">
+            Manthumat recitation
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/book-xxl.png" alt="">
+            Qur'an Recitation
+          </a>
+          <a href="#" class="dropdown-item">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/headphones-3-xxl.png" alt="">
+            Nasheed & Poetry
+          </a>
+        </div>
+      </div>
     </div>
-
     <div class="topbar-right">
       <div class="social-icons">
-        <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
-        <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram"></a>
-        <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube"></a>
-        <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram"></a>
+        <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
+        </a>
+        <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
+        </a>
+        <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
+        </a>
       </div>
       <div class="search-area">
         <div class="search-box">
@@ -239,7 +514,7 @@
       <div class="header-title" id="headerTitle">
         <img src="https://raw.githubusercontent.com/hamelal/hamelal/refs/heads/main/Index%20-%20Header/hamelal.png" alt="حامل الهداة">
         <div class="site-subtitle">
-          كتب شرعية – فوائد السلف – دروس صوتية – مقالات – مختارات من كلام العلماء
+          Islamic books – Benefits from the Salaf – Audio lessons – Articles – Excerpts from the words of the scholars
         </div>
       </div>
     </div>
@@ -259,111 +534,139 @@
 
   <footer>
     <div class="footer-social">
-      <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord"></a>
-      <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram"></a>
-      <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube"></a>
-      <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram"></a>
+      <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
+      </a>
+      <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
+      </a>
+      <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
+      </a>
+      <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+        <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
+      </a>
     </div>
-    <div class="footer-text">© حامل الهداة</div>
+    <div class="footer-text">
+      © حامل الهداة
+    </div>
   </footer>
 
   <div id="backToTop" title="Back to top">
-    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/arrow-up-6-xxl.png" alt="↑">
+    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/arrow-up-6-xxl.png" alt="Back to top">
   </div>
 
   <script>
-    // Header fade-in
+    // First-time header animation
     window.addEventListener('load', () => {
-      document.getElementById('headerTitle').classList.add('animate-on-load');
+      const header = document.getElementById('headerTitle');
+      setTimeout(() => {
+        header.classList.add('animate-on-load');
+      }, 300);
     });
 
     let articlesData = [];
-
-    // Try to load real data, if fails → show dummy articles so you can see layout
     fetch("/articles.json")
       .then(r => r.json())
       .then(d => {
         articlesData = d;
         renderArticles(d);
       })
-      .catch(() => {
-        // Fallback dummy data when json is missing / broken
-        const dummy = [
-          {
-            title: "Treatise on Note-Taking & Memorization",
-            date: "2025-07-10",
-            excerpt: "كيفية التعامل مع الكتاب من حيث التمييز والحفظ والمراجعة...",
-            file: "https://example.com/note-taking-treatise.html" // ← you can put any link here
-          },
-          {
-            title: "Fawā'id from Ibn al-Qayyim",
-            date: "2025-08-02",
-            excerpt: "مجموعة فوائد مختارة من كلام ابن القيم في الزهد والرقائق...",
-            file: "/articles/fawaid-ibn-qayyim.html"
-          },
-          {
-            title: "منهج السلف في طلب العلم",
-            date: "2025-06-15",
-            excerpt: "كيف كان السلف يطلبون العلم ويحفظونه ويعملون به...",
-            file: "https://another-site.com/manhaj-salaf.html"
-          }
-        ];
-        renderArticles(dummy);
-        document.getElementById("articlesList").insertAdjacentHTML('afterbegin', '<p style="color:#777; text-align:center; margin-bottom:12px; font-size:0.9rem;">(عرض تجريبي – أضف articles.json للمحتوى الحقيقي)</p>');
+      .catch(err => {
+        console.error("Failed to load articles.json", err);
+        document.getElementById("articlesList").innerHTML = "<p style='color:#888;text-align:center;padding:20px;'>No articles loaded yet.<br>Add articles.json to enable this section.</p>";
       });
 
     function formatGregorian(dateStr) {
-      if (!dateStr) return "غير معروف";
+      if (!dateStr) return "Unknown date";
       const date = new Date(dateStr);
-      if (isNaN(date)) return "تاريخ غير صالح";
-      return date.toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
+      if (isNaN(date)) return "Invalid date";
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
     }
 
     function renderArticles(list) {
-      const container = document.getElementById("articlesList");
-      container.innerHTML = "";
-
+      const c = document.getElementById("articlesList");
+      c.innerHTML = "";
       list
-        .filter(a => a && a.title)
-        .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
-        .forEach(item => {
-          const div = document.createElement("div");
-          div.className = "article";
-          div.innerHTML = `
-            <div class="article-title">${item.title}</div>
-            <div class="article-meta">
-              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" alt="تاريخ">
-              <span>${formatGregorian(item.date)}</span>
-            </div>
-            <p>${(item.excerpt || "").substring(0, 140)}${(item.excerpt || "").length > 140 ? "..." : ""}</p>
-          `;
-
+        .filter(a => a && a.title && a.date && a.excerpt)
+        .sort((a,b) => new Date(b.date) - new Date(a.date))
+        .forEach(a => {
+          const articleDiv = document.createElement("div");
+          articleDiv.className = "article";
+          
           // Make whole card clickable
-          const url = item.file || '#';
-          div.addEventListener("click", () => {
-            if (url !== '#') window.open(url, '_blank'); // open in new tab if external link
-            else window.location.href = url;
+          const link = a.file || '#';
+          articleDiv.innerHTML = `
+            <div class="article-title">${a.title}</div>
+            <div class="article-meta">
+              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png">
+              <span>${formatGregorian(a.date)}</span>
+            </div>
+            <p>${a.excerpt}</p>
+          `;
+          
+          articleDiv.addEventListener('click', () => {
+            window.location.href = link;
           });
 
-          container.appendChild(div);
+          c.appendChild(articleDiv);
         });
-
-      if (list.length === 0) {
-        container.innerHTML = '<p style="color:#777; text-align:center; padding:30px 0;">لا توجد مقالات بعد</p>';
-      }
     }
 
     function searchArticles() {
       const q = document.getElementById("searchInput").value.trim();
-      if (q) window.location.href = "/search.html?s=" + encodeURIComponent(q);
+      if (!q) return;
+      window.location.href = "/search.html?s=" + encodeURIComponent(q);
     }
 
     document.getElementById("searchInput").addEventListener("keydown", e => {
       if (e.key === "Enter") searchArticles();
     });
 
-    // rest of your scripts (suggestions, back to top) unchanged
-    // ...
+    const searchInput = document.getElementById("searchInput");
+    const suggestionsBox = document.getElementById("searchSuggestions");
+
+    searchInput.addEventListener("input", () => {
+      const q = searchInput.value.trim().toLowerCase();
+      suggestionsBox.innerHTML = "";
+      if (q.length < 2) {
+        suggestionsBox.style.display = "none";
+        return;
+      }
+      const matches = articlesData.filter(a =>
+        (a.title && a.title.toLowerCase().includes(q)) ||
+        (a.excerpt && a.excerpt.toLowerCase().includes(q))
+      ).slice(0,6);
+      matches.forEach(a => {
+        const item = document.createElement("div");
+        item.className = "suggestion-item";
+        item.innerHTML = `
+          <div class="suggestion-title">${a.title}</div>
+          <div class="suggestion-excerpt">${(a.excerpt || "").slice(0,70)}${(a.excerpt || "").length > 70 ? "..." : ""}</div>
+        `;
+        item.onclick = () => location.href = a.file || '#';
+        suggestionsBox.appendChild(item);
+      });
+      suggestionsBox.style.display = matches.length ? "block" : "none";
+    });
+
+    document.addEventListener("click", e => {
+      if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+        suggestionsBox.style.display = "none";
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      const btn = document.getElementById("backToTop");
+      btn.classList.toggle("visible", window.scrollY > 400);
+    });
+
+    document.getElementById("backToTop").onclick = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
   </script>
 </body>
 </html>
