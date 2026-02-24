@@ -1,27 +1,6 @@
 [
   {
-    "keyword": "note",
-    "keywords": ["note", "notes", "taking notes", "memorizing", "highlighting"],
-    "tag": "Note-taking",
-    "icon": "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/notebook.png"
-  },
-  {
-    "keyword": "aqidah",
-    "keywords": ["aqidah", "عقيدة", "creed", "tawhid"],
-    "tag": "‘Aqīdah",
-    "icon": "https://raw.githubusercontent.com/.../aqidah-icon.png"
-  },
-  {
-    "keyword": "manhaj",
-    "keywords": ["manhaj", "منهج", "methodology", "salafi manhaj"],
-    "tag": "Manhaj",
-    "icon": null
-  },
-  {
-    "keyword": "ibn qayyim",
-    "keywords": ["ibn qayyim", "ابن القيم"],
-    "tag": "Ibn al-Qayyim",
-    "icon": null
+    "keywords": ["note", "notes", "taking notes", "memorizing"],
+    "tag": "Note-taking"
   }
-  // add as many as you want
 ]
