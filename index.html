@@ -41,7 +41,7 @@
       font-size: 0.95rem;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .nav-left a {
+    .nav-left a, .dropdown-toggle {
       color: #ccc;
       text-decoration: none;
       font-weight: 500;
@@ -52,7 +52,7 @@
       border-radius: 6px;
       transition: all 0.2s ease;
     }
-    .nav-left a:hover {
+    .nav-left a:hover, .dropdown-toggle:hover {
       color: #f5f5f5;
       background: rgba(255,255,255,0.06);
     }
@@ -61,22 +61,6 @@
     }
     .dropdown-checkbox {
       display: none;
-    }
-    .dropdown-toggle {
-      color: #ccc;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .dropdown-toggle:hover {
-      color: #f5f5f5;
-      background: rgba(255,255,255,0.06);
     }
     .dropdown-toggle::after {
       content: "▼";
@@ -137,51 +121,211 @@
       height: 18px;
       filter: brightness(1.3);
     }
-
     .topbar-right {
       display: flex;
       align-items: center;
       gap: 14px;
     }
+
+    /* 90s Skeuomorphic Tokenfield + Filter Icon */
     .search-area {
-      display: flex;
-      align-items: center;
-      gap: 0;
       position: relative;
     }
-    .search-box input {
-      width: 240px;
-      height: 36px;
-      padding: 8px 12px;
-      border-radius: 8px 0 0 8px;
-      border: 1px solid #444;
-      border-right: none;
-      background: #1a1a1a;
-      color: #ddd;
-      transition: width 0.35s ease, box-shadow 0.3s;
-      font-size: 0.95rem;
+    .search-area-wrapper {
+      background: linear-gradient(to bottom, #e8e8e8, #c0c0c0);
+      border: 1px solid #000;
+      border-bottom-color: #404040;
+      border-right-color: #404040;
+      box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #808080;
+      border-radius: 4px;
+      padding: 4px 6px;
+      min-width: 320px;
+      max-width: 480px;
+      position: relative;
     }
-    .search-box input:focus {
-      width: 320px;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+    .tokenfield {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+      min-height: 28px;
+      font-family: "MS Sans Serif", "Tahoma", sans-serif;
+      font-size: 13px;
+      color: #000;
+      padding-right: 38px;
+    }
+    .chip {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom, #d4d0c8, #b0b0b0);
+      border: 1px solid #000;
+      border-top-color: #808080;
+      border-left-color: #808080;
+      box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #404040;
+      padding: 2px 6px 2px 4px;
+      border-radius: 3px;
+      white-space: nowrap;
+      position: relative;
+      cursor: default;
+      user-select: none;
+    }
+    .chip-arrow {
+      margin-right: 4px;
+      font-size: 10px;
+      color: #000;
+      cursor: pointer;
+      padding: 0 2px;
+    }
+    .chip-arrow:hover {
+      background: #000080;
+      color: #fff;
+    }
+    .chip-text {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+    .chip-text:hover {
+      text-decoration: underline;
+    }
+    .chip-remove {
+      cursor: pointer;
+      font-weight: bold;
+      color: #000;
+      padding: 0 4px;
+      margin-left: 2px;
+      line-height: 1;
+    }
+    .chip-remove:hover {
+      background: #c0c0c0;
+    }
+    .token-input {
+      flex: 1;
+      min-width: 100px;
+      border: none;
+      background: transparent;
       outline: none;
+      font-family: inherit;
+      font-size: inherit;
+      color: #000;
+      padding: 2px 0;
     }
-    .search-icon {
-      width: 42px;
-      height: 36px;
-      border-radius: 0 8px 8px 0;
-      background: #222;
-      border: 1px solid #444;
-      border-left: none;
+    .token-input::placeholder {
+      color: #606060;
+    }
+    .chip-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      background: #c0c0c0;
+      border: 1px solid #000;
+      border-top: none;
+      box-shadow: 2px 2px 0 #fff, -1px -1px 0 #000;
+      z-index: 100;
+      display: none;
+    }
+    .chip.active .chip-dropdown {
+      display: block;
+    }
+    .chip-dropdown-item {
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .chip-dropdown-item:hover {
+      background: #000080;
+      color: #fff;
+    }
+    .chip-dropdown-item img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .filter-icon-wrapper {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background 0.2s ease;
+      border-radius: 3px;
+      transition: background 0.15s;
     }
-    .search-icon:hover { background: #2a2a2a; }
-    .search-icon:active { transform: scale(0.94); }
-    .search-icon img { width: 18px; filter: brightness(1.4); }
+    .filter-icon-wrapper:hover {
+      background: #a0a0a0;
+    }
+    .filter-icon-wrapper:active {
+      background: #808080;
+    }
+    .filter-icon {
+      width: 20px;
+      height: 20px;
+      filter: brightness(0.3);
+    }
+    .filter-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 4px;
+      background: #c0c0c0;
+      border: 1px solid #000;
+      box-shadow: 2px 2px 0 #fff, -1px -1px 0 #000;
+      min-width: 220px;
+      z-index: 101;
+      display: none;
+      padding: 4px 0;
+    }
+    .filter-menu.visible {
+      display: block;
+    }
+    .filter-menu-item {
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .filter-menu-item:hover {
+      background: #000080;
+      color: white;
+    }
+    .filter-menu-item img {
+      width: 16px;
+      height: 16px;
+    }
+
+    #filterDescription {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: #222;
+      color: #eee;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      max-width: 340px;
+      font-size: 0.9rem;
+      z-index: 102;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      display: none;
+    }
+    #filterDescription.visible {
+      display: block;
+    }
+
+    /* Hide old search elements */
+    .search-box, .search-icon, .search-suggestions {
+      display: none !important;
+    }
 
     header {
       position: relative;
@@ -257,7 +401,6 @@
       background: #333;
     }
     .social-icons img { width: 18px; filter: brightness(1.3); }
-
     .container {
       max-width: 1150px;
       margin: 30px auto;
@@ -332,7 +475,6 @@
       width: 16px;
       height: 16px;
     }
-
     aside {
       background: #111;
       border: 1px solid #333;
@@ -360,7 +502,6 @@
       box-shadow: 0 4px 12px rgba(255,255,255,0.08);
       transform: translateY(-2px);
     }
-
     footer {
       margin-top: 60px;
       padding: 40px 20px 30px;
@@ -395,7 +536,6 @@
       opacity: 0.7;
       font-size: 0.95rem;
     }
-
     #backToTop {
       position: fixed;
       bottom: 32px;
@@ -429,19 +569,14 @@
     #backToTop:hover img {
       filter: brightness(1.6);
     }
-
     @media (max-width: 860px) {
       .container { grid-template-columns: 1fr; }
       .header-title img { width: 220px; }
       .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
       .dropdown-menu { left: 50%; transform: translateX(-50%) translateY(-12px) scale(0.95); width: 90%; max-width: 260px; }
       .dropdown-checkbox:checked ~ .dropdown-menu { transform: translateX(-50%) translateY(0) scale(1); }
-      #backToTop {
-        bottom: 24px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-      }
+      .search-area-wrapper { min-width: 240px; max-width: 100%; }
+      #backToTop { bottom: 24px; right: 20px; width: 40px; height: 40px; }
       #backToTop img { width: 22px; height: 22px; }
     }
   </style>
@@ -515,6 +650,7 @@
         </div>
       </div>
     </div>
+
     <div class="topbar-right">
       <div class="social-icons">
         <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
@@ -530,14 +666,36 @@
           <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
         </a>
       </div>
+
       <div class="search-area">
-        <div class="search-box">
-          <input id="searchInput" placeholder="Search articles…" autocomplete="off">
+        <div class="search-area-wrapper">
+          <div class="tokenfield" id="tokenfield">
+            <input type="text" class="token-input" placeholder="Search or add filters..." id="tokenInput">
+          </div>
+
+          <div class="filter-icon-wrapper" id="filterToggle">
+            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/empty-filter-xxl.png?raw=true" alt="Filter" class="filter-icon">
+          </div>
+
+          <div class="filter-menu" id="filterMenu">
+            <div class="filter-menu-item" data-category="Lesson & Studies">
+              <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-stack-xxl.png?raw=true" alt="">
+              Lesson & Studies
+            </div>
+            <div class="filter-menu-item" data-category="Excerpts of Knowledge">
+              <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="">
+              Excerpts of Knowledge
+            </div>
+            <div class="filter-menu-item" data-category="Audios">
+              <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="">
+              Audios
+            </div>
+          </div>
+
+          <div id="filterDescription">
+            When you select a navigation option (like 'Book library' or 'Gems of the Salaf & Ulamas'), the chip will appear in the search bar. If that category has sub-options, a dropdown arrow (▼) will show on the left of the chip — click it to see and choose more specific filters.
+          </div>
         </div>
-        <div class="search-icon" onclick="searchArticles()">
-          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/search-magnifying-glass-white-icon.webp" alt="Search">
-        </div>
-        <div class="search-suggestions" id="searchSuggestions"></div>
       </div>
     </div>
   </div>
@@ -582,187 +740,272 @@
   </div>
 
   <script>
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const header = document.getElementById('headerTitle');
       setTimeout(() => {
         header.classList.add('animate-on-load');
       }, 300);
-    });
 
-    let articlesData = [];
-    let tagRules = [];
+      // ─── 90s Skeuomorphic Tokenfield Logic ──────────────────────────────────────
+      const tokenfield = document.getElementById('tokenfield');
+      const tokenInput  = document.getElementById('tokenInput');
 
-    // Load tags.json first
-    fetch("/tags.json")
-      .then(r => r.ok ? r.json() : Promise.reject("tags.json not found"))
-      .then(rules => {
-        tagRules = rules || [];
-        return fetch("/articles.json");
-      })
-      .then(r => r.json())
-      .then(articles => {
-        articlesData = articles;
-        renderArticles(articles);
-      })
-      .catch(err => {
-        console.error("Error loading data:", err);
-        // Show fallback dummy articles so layout is visible
-        const fallbackArticles = [
-          {
-            title: "Treatise on Note-Taking & Memorization",
-            date: "2025-07-10",
-            excerpt: "How to benefit from books by organizing notes, highlighting, memorizing and revising according to the way of the Salaf...",
-            file: "/articles/taking-notes.html"
-          },
-          {
-            title: "Fawā'id from Ibn Taymiyyah on Tawḥīd",
-            date: "2025-08-03",
-            excerpt: "Selected benefits from Shaykh al-Islām Ibn Taymiyyah regarding the correct understanding of Tawḥīd and its categories...",
-            file: "https://example.com/fawaid-tawhid.html"
+      const categorySubmenus = {
+        "lesson & studies": [
+          { name: "Book library",        icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png",        href: "#" },
+          { name: "Benefits Playlist",   icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/folder-7-xxl.png",     href: "#" }
+        ],
+        "excerpts of knowledge": [
+          { name: "Gems of the Salaf & Ulamas", icon: "https://github.com/hamelal/hamelal.github.io/blob/main/articles/4324764.png?raw=true", href: "#" },
+          { name: "Books excerpt & Notes",      icon: "https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-xxl.png?raw=true",      href: "#" },
+          { name: "Recording Transcription",    icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png", href: "#" }
+        ],
+        "audios": [
+          { name: "Book reading/recitation",    icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png", href: "#" },
+          { name: "Manthumat recitation",       icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png", href: "#" },
+          { name: "Qur'an Recitation",          icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/book-xxl.png", href: "#" },
+          { name: "Nasheed & Poetry",           icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/headphones-3-xxl.png", href: "#" }
+        ]
+      };
+
+      function addFilterChip(name, icon = null, href = "#") {
+        const lowerName = name.toLowerCase().trim();
+        const hasSubmenu = !!categorySubmenus[lowerName];
+
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `
+          ${hasSubmenu ? `<span class="chip-arrow">▼</span>` : ''}
+          ${icon ? `<img src="${icon}" alt="" style="width:16px;height:16px;">` : ''}
+          <span class="chip-text" data-href="${href}">${name}</span>
+          <span class="chip-remove">×</span>
+          ${hasSubmenu ? `
+            <div class="chip-dropdown">
+              ${categorySubmenus[lowerName]?.map(sub => `
+                <div class="chip-dropdown-item" data-subfilter="${sub.name}" data-href="${sub.href || '#'}">
+                  ${sub.icon ? `<img src="${sub.icon}" alt="">` : ''}
+                  ${sub.name}
+                </div>
+              `).join('') || '<div class="chip-dropdown-item">No sub-options</div>'}
+            </div>
+          ` : ''}
+        `;
+
+        // Remove chip
+        chip.querySelector('.chip-remove').onclick = (e) => {
+          e.stopPropagation();
+          chip.remove();
+        };
+
+        // Arrow toggle submenu
+        const arrow = chip.querySelector('.chip-arrow');
+        if (arrow) {
+          arrow.onclick = (e) => {
+            e.stopPropagation();
+            const isActive = chip.classList.contains('active');
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            if (!isActive) chip.classList.add('active');
+          };
+        }
+
+        // Click chip text → go to category page/folder
+        chip.querySelector('.chip-text').onclick = (e) => {
+          e.stopPropagation();
+          const link = e.currentTarget.dataset.href;
+          if (link && link !== '#') {
+            window.location.href = link;
           }
-        ];
-        renderArticles(fallbackArticles);
-        document.getElementById("articlesList").insertAdjacentHTML('afterbegin',
-          '<p style="color:#777; text-align:center; margin-bottom:16px; font-size:0.95rem;">(Showing demo articles – add valid articles.json & tags.json to see real content)</p>'
-        );
+        };
+
+        // Sub-item click → add new chip
+        chip.querySelectorAll('.chip-dropdown-item').forEach(item => {
+          item.onclick = (e) => {
+            e.stopPropagation();
+            const subName = item.dataset.subfilter;
+            const subHref = item.dataset.href;
+            if (subName) {
+              addFilterChip(subName, item.querySelector('img')?.src, subHref);
+            }
+            chip.classList.remove('active');
+          };
+        });
+
+        const closeMenus = (e) => {
+          if (!chip.contains(e.target)) chip.classList.remove('active');
+        };
+        document.addEventListener('click', closeMenus);
+
+        tokenfield.insertBefore(chip, tokenInput);
+        tokenInput.value = '';
+        tokenInput.focus();
+      }
+
+      // Add chip when clicking nav dropdown items
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        const originalClick = item.onclick;
+        item.onclick = (e) => {
+          // e.preventDefault();   // uncomment if you don't want navigation
+          const text = item.textContent.trim();
+          const iconSrc = item.querySelector('img')?.src;
+          const parentToggle = item.closest('.dropdown-menu')?.previousElementSibling;
+          const parentName = parentToggle ? parentToggle.textContent.trim().toLowerCase() : '';
+
+          addFilterChip(text, iconSrc, "#");
+
+          if (originalClick) originalClick(e);
+        };
       });
 
-    function getAutoTags(text) {
-      if (!text || !tagRules.length) return [];
-      const lower = text.toLowerCase();
-      const found = new Set();
-
-      tagRules.forEach(rule => {
-        const keywords = rule.keywords || [rule.keyword || ""];
-        if (keywords.some(kw => kw && lower.includes(kw.toLowerCase()))) {
-          found.add(rule.tag);
+      // Typing + Enter for custom chips (main categories get arrow if matched)
+      tokenInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && tokenInput.value.trim()) {
+          e.preventDefault();
+          const text = tokenInput.value.trim();
+          addFilterChip(text, null, "#");
         }
       });
 
-      return Array.from(found).map(tag => {
-        const rule = tagRules.find(r => r.tag === tag);
-        return {
-          tag,
-          icon: rule?.icon || null
-        };
-      });
-    }
+      // Filter icon + first-time tooltip
+      const filterToggle = document.getElementById('filterToggle');
+      const filterMenu   = document.getElementById('filterMenu');
+      const filterDesc   = document.getElementById('filterDescription');
 
-    function renderArticles(list) {
-      const container = document.getElementById("articlesList");
-      container.innerHTML = "";
+      if (filterToggle && filterMenu) {
+        filterToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          filterMenu.classList.toggle('visible');
 
-      list
-        .filter(a => a && a.title && a.date && a.excerpt)
-        .sort((a,b) => new Date(b.date) - new Date(a.date))
-        .forEach(a => {
-          const div = document.createElement("div");
-          div.className = "article";
-
-          // Auto tags from title + excerpt
-          const searchText = (a.title + " " + (a.excerpt || "")).trim();
-          const tags = getAutoTags(searchText);
-
-          let tagsHTML = "";
-          if (tags.length) {
-            tagsHTML = '<div class="article-tags">';
-            tags.forEach(t => {
-              tagsHTML += `
-                <span class="article-tag">
-                  ${t.icon ? `<img src="${t.icon}" alt="">` : ""}
-                  ${t.tag}
-                </span>
-              `;
-            });
-            tagsHTML += "</div>";
+          // Show description only the first time
+          if (!localStorage.getItem('filterTipShown')) {
+            filterDesc.classList.add('visible');
+            localStorage.setItem('filterTipShown', 'true');
+            // Auto-hide after 12 seconds
+            setTimeout(() => {
+              filterDesc.classList.remove('visible');
+            }, 12000);
           }
-
-          div.innerHTML = `
-            <div class="article-title">${a.title}</div>
-            <div class="article-meta">
-              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" width="14">
-              <span>${formatGregorian(a.date)}</span>
-            </div>
-            <p>${a.excerpt}</p>
-            ${tagsHTML}
-          `;
-
-          // Make whole card clickable
-          const url = a.file || '#';
-          div.style.cursor = url !== '#' ? "pointer" : "default";
-          div.addEventListener("click", () => {
-            if (url !== '#') window.location.href = url;
-          });
-
-          container.appendChild(div);
         });
 
-      if (!list.length) {
-        container.innerHTML = '<p style="color:#777; text-align:center; padding:40px 0;">No articles available yet.</p>';
+        document.addEventListener('click', (e) => {
+          if (!filterToggle.contains(e.target) && !filterMenu.contains(e.target) && !filterDesc.contains(e.target)) {
+            filterMenu.classList.remove('visible');
+            filterDesc.classList.remove('visible');
+          }
+        });
+
+        filterMenu.querySelectorAll('.filter-menu-item').forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const categoryName = item.dataset.category;
+            const iconSrc = item.querySelector('img')?.src;
+            addFilterChip(categoryName, iconSrc, "#"); // ← replace "#" with real link
+            filterMenu.classList.remove('visible');
+          });
+        });
       }
-    }
 
-    function formatGregorian(dateStr) {
-      if (!dateStr) return "Unknown date";
-      const date = new Date(dateStr);
-      if (isNaN(date)) return "Invalid date";
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
-    }
+      // ─── Original article loading logic ────────────────────────────────────────
+      let articlesData = [];
+      let tagRules = [];
 
-    function searchArticles() {
-      const q = document.getElementById("searchInput").value.trim();
-      if (!q) return;
-      window.location.href = "/search.html?s=" + encodeURIComponent(q);
-    }
+      fetch("/tags.json")
+        .then(r => r.ok ? r.json() : Promise.reject("tags.json not found"))
+        .then(rules => {
+          tagRules = rules || [];
+          return fetch("/articles.json");
+        })
+        .then(r => r.json())
+        .then(articles => {
+          articlesData = articles;
+          renderArticles(articles);
+        })
+        .catch(err => {
+          console.error("Error loading data:", err);
+          const fallbackArticles = [
+            {
+              title: "Treatise on Note-Taking & Memorization",
+              date: "2025-07-10",
+              excerpt: "How to benefit from books by organizing notes...",
+              file: "/articles/taking-notes.html"
+            }
+          ];
+          renderArticles(fallbackArticles);
+          document.getElementById("articlesList").insertAdjacentHTML('afterbegin',
+            '<p style="color:#777; text-align:center; margin-bottom:16px; font-size:0.95rem;">(Showing demo articles – add valid articles.json & tags.json to see real content)</p>'
+          );
+        });
 
-    document.getElementById("searchInput").addEventListener("keydown", e => {
-      if (e.key === "Enter") searchArticles();
-    });
-
-    const searchInput = document.getElementById("searchInput");
-    const suggestionsBox = document.getElementById("searchSuggestions");
-
-    searchInput.addEventListener("input", () => {
-      const q = searchInput.value.trim().toLowerCase();
-      suggestionsBox.innerHTML = "";
-      if (q.length < 2) {
-        suggestionsBox.style.display = "none";
-        return;
+      function getAutoTags(text) {
+        if (!text || !tagRules.length) return [];
+        const lower = text.toLowerCase();
+        const found = new Set();
+        tagRules.forEach(rule => {
+          const keywords = rule.keywords || [rule.keyword || ""];
+          if (keywords.some(kw => kw && lower.includes(kw.toLowerCase()))) {
+            found.add(rule.tag);
+          }
+        });
+        return Array.from(found).map(tag => {
+          const rule = tagRules.find(r => r.tag === tag);
+          return { tag, icon: rule?.icon || null };
+        });
       }
-      const matches = articlesData.filter(a =>
-        (a.title && a.title.toLowerCase().includes(q)) ||
-        (a.excerpt && a.excerpt.toLowerCase().includes(q))
-      ).slice(0,6);
-      matches.forEach(a => {
-        const item = document.createElement("div");
-        item.className = "suggestion-item";
-        item.innerHTML = `
-          <div class="suggestion-title">${a.title}</div>
-          <div class="suggestion-excerpt">${(a.excerpt || "").slice(0,70)}${(a.excerpt || "").length > 70 ? "..." : ""}</div>
-        `;
-        item.onclick = () => location.href = a.file || '#';
-        suggestionsBox.appendChild(item);
+
+      function renderArticles(list) {
+        const container = document.getElementById("articlesList");
+        container.innerHTML = "";
+        list
+          .filter(a => a && a.title && a.date && a.excerpt)
+          .sort((a,b) => new Date(b.date) - new Date(a.date))
+          .forEach(a => {
+            const div = document.createElement("div");
+            div.className = "article";
+            const searchText = (a.title + " " + (a.excerpt || "")).trim();
+            const tags = getAutoTags(searchText);
+            let tagsHTML = tags.length ? '<div class="article-tags">' + tags.map(t => `
+              <span class="article-tag">
+                ${t.icon ? `<img src="${t.icon}" alt="">` : ""}
+                ${t.tag}
+              </span>
+            `).join('') + '</div>' : '';
+
+            div.innerHTML = `
+              <div class="article-title">${a.title}</div>
+              <div class="article-meta">
+                <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" width="14">
+                <span>${formatGregorian(a.date)}</span>
+              </div>
+              <p>${a.excerpt}</p>
+              ${tagsHTML}
+            `;
+            const url = a.file || '#';
+            div.style.cursor = url !== '#' ? "pointer" : "default";
+            div.addEventListener("click", () => { if (url !== '#') window.location.href = url; });
+            container.appendChild(div);
+          });
+        if (!list.length) {
+          container.innerHTML = '<p style="color:#777; text-align:center; padding:40px 0;">No articles available yet.</p>';
+        }
+      }
+
+      function formatGregorian(dateStr) {
+        if (!dateStr) return "Unknown date";
+        const date = new Date(dateStr);
+        if (isNaN(date)) return "Invalid date";
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      }
+
+      window.addEventListener("scroll", () => {
+        const btn = document.getElementById("backToTop");
+        btn.classList.toggle("visible", window.scrollY > 400);
       });
-      suggestionsBox.style.display = matches.length ? "block" : "none";
+      document.getElementById("backToTop").onclick = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
     });
-
-    document.addEventListener("click", e => {
-      if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
-        suggestionsBox.style.display = "none";
-      }
-    });
-
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("backToTop");
-      btn.classList.toggle("visible", window.scrollY > 400);
-    });
-
-    document.getElementById("backToTop").onclick = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
   </script>
 </body>
 </html>
