@@ -2,7 +2,13 @@
   {
     "title": "Treatise of Taking-Notes",
     "date": "2026-02-22",
-    "excerpt": "Obviously there is benefits in taking a note of something...",
+    "excerpt": "Obviously there is benefits in taking a note of something and in turning to it 100% but the thing is When you are new to a book...",
     "file": "https://al-istibanah.vercel.app/articles/treatise%20of%20taking%20notes.html"
+  },
+  {
+    "title": "Test Article 2",
+    "date": "2025-12-01",
+    "excerpt": "Short excerpt for testing layout and tags...",
+    "file": "#"
   }
 ]
