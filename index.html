@@ -1,12 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>حامل الهداة</title>
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/image-removebg-preview.png">
+ 
+  <!-- Open Graph / Rich Embed (Discord, Telegram, Facebook, etc.) -->
+  <meta property="og:title" content="Hamelal Al-Huda • حامل الهداة">
+  <meta property="og:site_name" content="Hamelal Al-Huda">
+  <meta property="og:description" content="Upon the Methodology of the Righteous Predecessors (Salaf) — Providing you with transcriptions of lectures, recitation of the noble Qur'an, nasheed, and manthummat.">
+  <meta property="og:description:ar" content="على منهج السلف الصالح — تقديم لكم تسجيلات المحاضرات وتلاوة القرآن الكريم والأناشيد والمنظومات">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hamelal.github.io/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hamelal Al-Huda Logo • شعار حامل الهداة">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_AR">
+  <!-- Telegram & general fallback -->
+  <meta name="description" content="Upon the Methodology of the Righteous Predecessors — lectures, Qur'an recitation, nasheed & manthummat">
+  <meta name="theme-color" content="#0f0f0f">
+  <!-- Twitter/X Cards (large image preview) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hamelal Al-Huda • حامل الهداة">
+  <meta name="twitter:description" content="Upon the Methodology of the Righteous Predecessors (Salaf) — Providing you with transcriptions of lectures, recitation of the noble Qur'an, nasheed, and manthummat.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
+ 
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -21,7 +44,6 @@
     ::-webkit-scrollbar-thumb:hover { background: #555; }
     html { scrollbar-width: thin; scrollbar-color: #333 #0f0f0f; }
     body { overflow-x: hidden; }
-
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -41,7 +63,7 @@
       font-size: 0.95rem;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .nav-left a {
+    .nav-left a, .dropdown-toggle {
       color: #ccc;
       text-decoration: none;
       font-weight: 500;
@@ -52,31 +74,20 @@
       border-radius: 6px;
       transition: all 0.2s ease;
     }
-    .nav-left a:hover {
+    .nav-left a:hover, .dropdown-toggle:hover {
       color: #f5f5f5;
       background: rgba(255,255,255,0.06);
+    }
+    .nav-left img, .dropdown-toggle img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(1.3);
     }
     .dropdown {
       position: relative;
     }
     .dropdown-checkbox {
       display: none;
-    }
-    .dropdown-toggle {
-      color: #ccc;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .dropdown-toggle:hover {
-      color: #f5f5f5;
-      background: rgba(255,255,255,0.06);
     }
     .dropdown-toggle::after {
       content: "▼";
@@ -90,11 +101,6 @@
     .dropdown-checkbox:checked + .dropdown-toggle {
       background: rgba(255,255,255,0.08);
       color: #fff;
-    }
-    .nav-left img, .dropdown-toggle img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(1.3);
     }
     .dropdown-menu {
       position: absolute;
@@ -137,52 +143,163 @@
       height: 18px;
       filter: brightness(1.3);
     }
-
     .topbar-right {
       display: flex;
       align-items: center;
       gap: 14px;
     }
-    .search-area {
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+    .social-icons a {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
-      gap: 0;
+      justify-content: center;
+      background: #222;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+    .social-icons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
+      background: #333;
+    }
+    .social-icons img {
+      width: 18px;
+      filter: brightness(1.3);
+    }
+    /* Black tokenfield with skeuomorphic touch */
+    .search-area {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+    .search-wrapper {
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 6px 12px;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+    }
+    .chip {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 16px;
+      padding: 4px 10px;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e0e0e0;
       position: relative;
     }
-    .search-box input {
-      width: 240px;
-      height: 36px;
-      padding: 8px 12px;
-      border-radius: 8px 0 0 8px;
-      border: 1px solid #444;
-      border-right: none;
-      background: #1a1a1a;
-      color: #ddd;
-      transition: width 0.35s ease, box-shadow 0.3s;
-      font-size: 0.95rem;
+    .chip-arrow {
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      margin-right: -2px;
+      border-radius: 4px;
     }
-    .search-box input:focus {
-      width: 320px;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+    .chip-arrow:hover {
+      background: #333;
+      color: white;
+    }
+    .chip .remove {
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-left: 6px;
+      line-height: 1;
+    }
+    .token-input {
+      flex: 1;
+      min-width: 140px;
+      border: none;
+      background: transparent;
       outline: none;
+      color: #e0e0e0;
+      font-size: 1rem;
     }
-    .search-icon {
-      width: 42px;
-      height: 36px;
-      border-radius: 0 8px 8px 0;
-      background: #222;
-      border: 1px solid #444;
-      border-left: none;
+    .token-input::placeholder { color: #888; }
+    .filter-icon-wrapper {
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background 0.2s ease;
+      border-radius: 6px;
+      transition: background 0.15s;
     }
-    .search-icon:hover { background: #2a2a2a; }
-    .search-icon:active { transform: scale(0.94); }
-    .search-icon img { width: 18px; filter: brightness(1.4); }
-
+    .filter-icon-wrapper:hover {
+      background: #2a2a2a;
+    }
+    .filter-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      filter: brightness(1.4);
+    }
+    /* Chip sub-menu */
+    .chip-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      z-index: 10;
+      display: none;
+      margin-top: 4px;
+    }
+    .chip.active .chip-dropdown { display: block; }
+    .chip-dropdown-item {
+      padding: 8px 14px;
+      color: #ccc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chip-dropdown-item:hover { background: #2a2a2a; }
+    .chip-dropdown-item img { width: 18px; height: 18px; filter: brightness(1.3); }
+    /* Filter menu (main categories) */
+    .filter-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      z-index: 100;
+      display: none;
+      min-width: 220px;
+    }
+    .filter-menu.visible { display: block; }
+    .filter-menu-item {
+      padding: 10px 16px;
+      color: #ccc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .filter-menu-item:hover { background: #2a2a2a; }
+    .filter-menu-item img { width: 18px; height: 18px; filter: brightness(1.3); }
     header {
       position: relative;
       border-bottom: 1px solid #333;
@@ -196,7 +313,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url("https://github.com/hamelal/hamelal/blob/main/Index%20-%20Header/Islamic%20books.jpg?raw=true") center/cover no-repeat;
+      background: url("https://raw.githubusercontent.com/hamelal/hamelal/main/Index%20-%20Header/Islamic%20books.jpg") center/cover no-repeat;
       opacity: 0.24;
     }
     header::after {
@@ -236,28 +353,6 @@
       margin: 0 auto;
       font-family: "Cormorant Garamond", serif;
     }
-    .social-icons {
-      display: flex;
-      gap: 10px;
-    }
-    .social-icons a {
-      width: 34px;
-      height: 34px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #222;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
-      transition: all 0.2s ease;
-    }
-    .social-icons a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
-      background: #333;
-    }
-    .social-icons img { width: 18px; filter: brightness(1.3); }
-
     .container {
       max-width: 1150px;
       margin: 30px auto;
@@ -280,18 +375,72 @@
       border-bottom: 1px solid #444;
       padding-bottom: 8px;
     }
+    /* Enhanced for arrangement: Featured Carousel on top */
+    .featured-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      background: #1a1a1a;
+    }
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-item {
+      min-width: 100%;
+      padding: 24px;
+      text-align: center;
+      background: linear-gradient(to bottom, #222, #1a1a1a);
+    }
+    .carousel-item .article-title {
+      font-size: 28px;
+      color: #e0e0e0;
+    }
+    .carousel-item .article-meta {
+      justify-content: center;
+    }
+    .carousel-item .article-excerpt {
+      max-width: 800px;
+      margin: 16px auto 0;
+      font-size: 1.1rem;
+    }
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-btn {
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: #ccc;
+      font-size: 1.5rem;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+    }
+    /* Regular articles grid below */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
     .article {
       padding: 16px;
       border-radius: 8px;
       background: #1a1a1a;
       border: 1px solid #2a2a2a;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeIn 0.6s forwards;
       transition: all 0.2s ease;
       cursor: pointer;
     }
-    @keyframes fadeIn { to { opacity:1; } }
     .article:hover {
       background: #222;
       box-shadow: 0 4px 16px rgba(255,255,255,0.06);
@@ -312,7 +461,6 @@
       font-family: system-ui, sans-serif;
     }
     .article-meta img { width: 14px; filter: brightness(1.4); }
-
     aside {
       background: #111;
       border: 1px solid #333;
@@ -340,7 +488,6 @@
       box-shadow: 0 4px 12px rgba(255,255,255,0.08);
       transform: translateY(-2px);
     }
-
     footer {
       margin-top: 60px;
       padding: 40px 20px 30px;
@@ -375,7 +522,6 @@
       opacity: 0.7;
       font-size: 0.95rem;
     }
-
     #backToTop {
       position: fixed;
       bottom: 32px;
@@ -409,41 +555,37 @@
     #backToTop:hover img {
       filter: brightness(1.6);
     }
-
     @media (max-width: 860px) {
       .container { grid-template-columns: 1fr; }
       .header-title img { width: 220px; }
       .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
       .dropdown-menu { left: 50%; transform: translateX(-50%) translateY(-12px) scale(0.95); width: 90%; max-width: 260px; }
       .dropdown-checkbox:checked ~ .dropdown-menu { transform: translateX(-50%) translateY(0) scale(1); }
-      #backToTop {
-        bottom: 24px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-      }
+      .search-area { max-width: 100%; }
+      #backToTop { bottom: 24px; right: 20px; width: 40px; height: 40px; }
       #backToTop img { width: 22px; height: 22px; }
+      .articles-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="topbar" id="topbar">
     <div class="nav-left">
-      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/home-page-white-icon.webp" alt="">Home</a>
-      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/report-3-xxl.png" alt="">Articles</a>
+      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/home-page-white-icon.webp" alt="">Home</a>
+      <a href="#"><img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/report-3-xxl.png" alt="">Articles</a>
       <div class="dropdown">
         <input type="checkbox" id="dd-lessons" class="dropdown-checkbox" hidden>
         <label for="dd-lessons" class="dropdown-toggle">
-          <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-stack-xxl.png?raw=true" alt="">
+          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-stack-xxl.png" alt="">
           Lesson & Studies
         </label>
         <div class="dropdown-menu">
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/books-xxl.png" alt="">
             Book library
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/folder-7-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/folder-7-xxl.png" alt="">
             Benefits Playlist
           </a>
         </div>
@@ -451,20 +593,20 @@
       <div class="dropdown">
         <input type="checkbox" id="dd-excerpts" class="dropdown-checkbox" hidden>
         <label for="dd-excerpts" class="dropdown-toggle">
-          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="">
+          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" alt="">
           Excerpts of Knowledge
         </label>
         <div class="dropdown-menu">
           <a href="#" class="dropdown-item">
-            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/4324764.png?raw=true" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" alt="">
             Gems of the Salaf & Ulamas
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://github.com/hamelal/hamelal.github.io/blob/main/articles/book-xxl.png?raw=true" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-xxl.png" alt="">
             Books excerpt & Notes
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/microphone-xxl.png" alt="">
             Recording Transcription
           </a>
         </div>
@@ -472,24 +614,24 @@
       <div class="dropdown">
         <input type="checkbox" id="dd-audios" class="dropdown-checkbox" hidden>
         <label for="dd-audios" class="dropdown-toggle">
-          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/microphone-xxl.png" alt="">
+          <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/microphone-xxl.png" alt="">
           Audios
         </label>
         <div class="dropdown-menu">
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/books-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/books-xxl.png" alt="">
             Book reading/recitation
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/4324764.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" alt="">
             Manthumat recitation
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/book-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-xxl.png" alt="">
             Qur'an Recitation
           </a>
           <a href="#" class="dropdown-item">
-            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/headphones-3-xxl.png" alt="">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/headphones-3-xxl.png" alt="">
             Nasheed & Poetry
           </a>
         </div>
@@ -511,32 +653,50 @@
         </a>
       </div>
       <div class="search-area">
-        <div class="search-box">
-          <input id="searchInput" placeholder="Search articles…" autocomplete="off">
+        <div class="search-wrapper" id="tokenfield">
+          <input type="text" class="token-input" id="tokenInput" placeholder="Search or add filters…">
+          <div class="filter-icon-wrapper" id="filterToggle">
+            <img class="filter-icon" src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/empty-filter-xxl.png" alt="Filter">
+          </div>
         </div>
-        <div class="search-icon" onclick="searchArticles()">
-          <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/search-magnifying-glass-white-icon.webp" alt="Search">
+        <div class="filter-menu" id="filterMenu">
+          <div class="filter-menu-item" data-category="Lesson & Studies">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-stack-xxl.png" alt="">
+            Lesson & Studies
+          </div>
+          <div class="filter-menu-item" data-category="Excerpts of Knowledge">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" alt="">
+            Excerpts of Knowledge
+          </div>
+          <div class="filter-menu-item" data-category="Audios">
+            <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/microphone-xxl.png" alt="">
+            Audios
+          </div>
         </div>
-        <div class="search-suggestions" id="searchSuggestions"></div>
       </div>
     </div>
   </div>
-
   <header>
     <div class="header-inner">
       <div class="header-title" id="headerTitle">
-        <img src="https://raw.githubusercontent.com/hamelal/hamelal/refs/heads/main/Index%20-%20Header/hamelal.png" alt="حامل الهداة">
+        <img src="https://raw.githubusercontent.com/hamelal/hamelal/main/Index%20-%20Header/hamelal.png" alt="حامل الهداة">
         <div class="site-subtitle">
           Islamic books – Benefits from the Salaf – Audio lessons – Articles – Excerpts from the words of the scholars
         </div>
       </div>
     </div>
   </header>
-
   <div class="container">
     <main>
-      <h2>Recommended</h2>
-      <div id="articlesList"></div>
+      <h2>Recommended Posts</h2>
+      <div class="featured-carousel" id="featuredCarousel">
+        <div class="carousel-inner" id="carouselInner"></div>
+        <div class="carousel-controls">
+          <button class="carousel-btn prev" id="prevBtn">&lt;</button>
+          <button class="carousel-btn next" id="nextBtn">&gt;</button>
+        </div>
+      </div>
+      <div class="articles-grid" id="articlesGrid"></div>
     </main>
     <aside>
       <h3>Navigation</h3>
@@ -544,7 +704,6 @@
       <div class="nav-item">Articles</div>
     </aside>
   </div>
-
   <footer>
     <div class="footer-social">
       <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
@@ -564,95 +723,168 @@
       © حامل الهداة
     </div>
   </footer>
-
   <div id="backToTop" title="Back to top">
-    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/arrow-up-6-xxl.png" alt="Back to top">
+    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/arrow-up-6-xxl.png" alt="Back to top">
   </div>
-
   <script>
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const header = document.getElementById('headerTitle');
-      setTimeout(() => {
-        header.classList.add('animate-on-load');
-      }, 300);
-    });
-
-    let articlesData = [];
-    fetch("/articles.json")
-      .then(r => r.json())
-      .then(d => {
-        articlesData = d;
-        renderArticles(d);
-      })
-      .catch(err => {
-        console.error("Failed to load articles.json", err);
-        document.getElementById("articlesList").innerHTML = 
-          "<p style='color:#888;text-align:center;padding:40px 0;'>No articles loaded yet.<br>Add articles.json to enable this section.</p>";
-      });
-
-    function formatGregorian(dateStr) {
-      if (!dateStr) return "Unknown date";
-      const date = new Date(dateStr);
-      if (isNaN(date)) return "Invalid date";
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
-    }
-
-    function renderArticles(list) {
-      const container = document.getElementById("articlesList");
-      container.innerHTML = "";
-
-      list
-        .filter(a => a && a.title && a.date && a.excerpt)
-        .sort((a,b) => new Date(b.date) - new Date(a.date))
-        .forEach(a => {
-          const div = document.createElement("div");
-          div.className = "article";
-          div.innerHTML = `
-            <div class="article-title">${a.title}</div>
-            <div class="article-meta">
-              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png">
-              <span>${formatGregorian(a.date)}</span>
+      setTimeout(() => header.classList.add('animate-on-load'), 300);
+      // Tokenfield and filter logic
+      const tokenfield = document.getElementById('tokenfield');
+      const tokenInput = document.getElementById('tokenInput');
+      const filterToggle = document.getElementById('filterToggle');
+      const filterMenu = document.getElementById('filterMenu');
+      const subMenus = {
+        "Lesson & Studies": [
+          { name: "Book library", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/books-xxl.png" },
+          { name: "Benefits Playlist", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/folder-7-xxl.png" }
+        ],
+        "Excerpts of Knowledge": [
+          { name: "Gems of the Salaf & Ulamas", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" },
+          { name: "Books excerpt & Notes", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-xxl.png" },
+          { name: "Recording Transcription", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/microphone-xxl.png" }
+        ],
+        "Audios": [
+          { name: "Book reading/recitation", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/books-xxl.png" },
+          { name: "Manthumat recitation", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/4324764.png" },
+          { name: "Qur'an Recitation", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/book-xxl.png" },
+          { name: "Nasheed & Poetry", icon: "https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/headphones-3-xxl.png" }
+        ]
+      };
+      function addFilterChip(name, icon = null) {
+        const hasSubmenu = !!subMenus[name];
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `
+          ${hasSubmenu ? `<span class="chip-arrow">▼</span>` : ''}
+          ${icon ? `<img src="${icon}" alt="" style="width:16px;height:16px;">` : ''}
+          <span class="chip-text">${name}</span>
+          <span class="remove">×</span>
+          ${hasSubmenu ? `
+            <div class="chip-dropdown">
+              ${subMenus[name].map(sub => `
+                <div class="chip-dropdown-item">
+                  ${sub.icon ? `<img src="${sub.icon}" alt="">` : ''}
+                  ${sub.name}
+                </div>
+              `).join('')}
             </div>
-            <p>${a.excerpt}</p>
-          `;
-
-          // Make whole card clickable
-          const url = a.file || '#';
-          div.style.cursor = url !== '#' ? "pointer" : "default";
-          div.addEventListener("click", () => {
-            if (url !== '#') window.location.href = url;
-          });
-
-          container.appendChild(div);
-        });
-
-      if (list.length === 0) {
-        container.innerHTML = "<p style='color:#888;text-align:center;padding:40px 0;'>No articles available.</p>";
+          ` : ''}
+        `;
+        chip.querySelector('.remove').onclick = () => chip.remove();
+        const arrow = chip.querySelector('.chip-arrow');
+        if (arrow) {
+          arrow.onclick = e => {
+            e.stopPropagation();
+            chip.classList.toggle('active');
+          };
+        }
+        tokenfield.insertBefore(chip, tokenInput);
+        tokenInput.value = '';
+        tokenInput.focus();
       }
-    }
-
-    function searchArticles() {
-      const q = document.getElementById("searchInput").value.trim();
-      if (!q) return;
-      window.location.href = "/search.html?s=" + encodeURIComponent(q);
-    }
-
-    document.getElementById("searchInput").addEventListener("keydown", e => {
-      if (e.key === "Enter") searchArticles();
+      tokenInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const value = tokenInput.value.trim();
+          const hasChips = tokenfield.querySelectorAll('.chip').length > 0;
+          if (!hasChips && value) {
+            // Simulate search redirect
+            console.log('Search for: ', value);
+          }
+        }
+      });
+      filterToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        filterMenu.classList.toggle('visible');
+      });
+      document.addEventListener('click', e => {
+        if (!filterToggle.contains(e.target) && !filterMenu.contains(e.target)) {
+          filterMenu.classList.remove('visible');
+        }
+        if (!e.target.closest('.chip')) {
+          document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        }
+      });
+      filterMenu.querySelectorAll('.filter-menu-item').forEach(item => {
+        item.addEventListener('click', e => {
+          e.stopPropagation();
+          const cat = item.dataset.category;
+          addFilterChip(cat, item.querySelector('img')?.src);
+          filterMenu.classList.remove('visible');
+        });
+      });
+      // Articles fetch and arrangement
+      fetch("/articles.json")
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(articles => {
+          const carouselInner = document.getElementById("carouselInner");
+          const articlesGrid = document.getElementById("articlesGrid");
+          // Featured: first 3 in carousel (adjust number as needed)
+          const featured = articles.slice(0, 3);
+          const rest = articles.slice(3);
+          // Build carousel items
+          featured.forEach(a => {
+            const item = document.createElement("div");
+            item.className = "carousel-item";
+            item.innerHTML = `
+              <div class="article-title">${a.title || "No title"}</div>
+              <div class="article-meta">
+                <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" alt="">
+                <span>${a.date || ""}</span>
+              </div>
+              <p class="article-excerpt">${a.excerpt || ""}</p>
+            `;
+            if (a.file) {
+              item.style.cursor = "pointer";
+              item.onclick = () => window.location = a.file;
+            }
+            carouselInner.appendChild(item);
+          });
+          // Carousel functionality
+          let currentIndex = 0;
+          const items = carouselInner.children;
+          const total = items.length;
+          if (total > 0) {
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+            function showSlide(index) {
+              carouselInner.style.transform = `translateX(-${index * 100}%)`;
+              currentIndex = index;
+            }
+            prevBtn.onclick = () => showSlide((currentIndex - 1 + total) % total);
+            nextBtn.onclick = () => showSlide((currentIndex + 1) % total);
+            // Auto-slide optional
+            setInterval(() => nextBtn.onclick(), 5000);
+          }
+          // Build rest grid
+          rest.forEach(a => {
+            const div = document.createElement("div");
+            div.className = "article";
+            div.innerHTML = `
+              <div class="article-title">${a.title || "No title"}</div>
+              <div class="article-meta">
+                <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" alt="">
+                <span>${a.date || ""}</span>
+              </div>
+              <p>${a.excerpt || ""}</p>
+            `;
+            if (a.file) {
+              div.onclick = () => window.location = a.file;
+            }
+            articlesGrid.appendChild(div);
+          });
+        })
+        .catch(() => {
+          document.getElementById("articlesGrid").innerHTML = "<p style='text-align:center;color:#777;'>No articles loaded (add articles.json)</p>";
+        });
+      // Back to top
+      window.addEventListener("scroll", () => {
+        document.getElementById("backToTop").classList.toggle("visible", window.scrollY > 400);
+      });
+      document.getElementById("backToTop").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
     });
-
-    // Back to top
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("backToTop");
-      btn.classList.toggle("visible", window.scrollY > 400);
-    });
-
-    document.getElementById("backToTop").onclick = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
   </script>
 </body>
 </html>
