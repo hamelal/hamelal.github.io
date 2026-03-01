@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>حامل الهداة</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/image-removebg-preview.png">
+  <meta property="og:title" content="Hamelal Al-Huda • حامل الهداة">
+  <meta property="og:description" content="Upon the Methodology of the Righteous Predecessors — lectures, Qur'an recitation, nasheed & manthummat">
+  <meta property="og:image" content="https://raw.githubusercontent.com/hamelal/hamelal.github.io/refs/heads/main/articles/download.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -38,7 +42,6 @@
       align-items: center;
       gap: 24px;
       font-size: 0.95rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .nav-left a, .dropdown-toggle {
@@ -83,11 +86,6 @@
       transform: rotate(180deg);
     }
 
-    .dropdown-checkbox:checked + .dropdown-toggle {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-    }
-
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -98,11 +96,10 @@
       border-radius: 6px;
       min-width: 220px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.65);
-      z-index: 999;
       opacity: 0;
       visibility: hidden;
       transform: translateY(-12px) scale(0.95);
-      transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+      transition: all 0.22s ease;
       pointer-events: none;
     }
 
@@ -116,23 +113,14 @@
     .dropdown-item {
       padding: 10px 16px;
       color: #ccc;
-      cursor: pointer;
-      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .dropdown-item:hover {
-      background: #222;
-    }
-
-    .dropdown-item img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(1.3);
-    }
+    .dropdown-item:hover { background: #222; }
 
     .topbar-right {
       display: flex;
@@ -153,14 +141,12 @@
       align-items: center;
       justify-content: center;
       background: #222;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.5);
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
     .social-icons a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(255,255,255,0.15);
       background: #333;
+      transform: translateY(-2px);
     }
 
     .social-icons img {
@@ -169,9 +155,8 @@
     }
 
     .search-area {
-      position: relative;
-      width: 100%;
       max-width: 220px;
+      width: 100%;
     }
 
     .search-wrapper {
@@ -183,7 +168,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      flex-wrap: wrap;
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
     }
 
@@ -197,8 +181,7 @@
       align-items: center;
       gap: 6px;
       color: #e0e0e0;
-      position: relative;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: system-ui, sans-serif;
     }
 
     .chip .remove {
@@ -207,7 +190,6 @@
       color: #fff;
       font-size: 1.3rem;
       margin-left: 6px;
-      line-height: 1;
     }
 
     .token-input {
@@ -230,17 +212,13 @@
       justify-content: center;
       cursor: pointer;
       border-radius: 6px;
-      transition: background 0.15s;
     }
 
-    .filter-icon-wrapper:hover {
-      background: #2a2a2a;
-    }
+    .filter-icon-wrapper:hover { background: #2a2a2a; }
 
     .filter-icon {
       width: 20px;
       height: 20px;
-      object-fit: contain;
       filter: brightness(1.4);
     }
 
@@ -260,24 +238,15 @@
       background: url("https://raw.githubusercontent.com/hamelal/hamelal/main/Index%20-%20Header/Islamic%20books.jpg") center/cover no-repeat;
       opacity: 0.24;
     }
-    .header-inner {
+    .header-title {
       position: relative;
       max-width: 1100px;
       margin: auto;
       z-index: 2;
-    }
-    .header-title {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      opacity: 0;
-      transform: scale(0.92);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
-    .header-title.animate-on-load {
-      opacity: 1;
-      transform: scale(1);
     }
     .header-title img {
       width: 260px;
@@ -287,8 +256,6 @@
       font-size: 1.15rem;
       color: #bbb;
       max-width: 680px;
-      margin: 0 auto;
-      font-family: "Cormorant Garamond", serif;
     }
 
     .container {
@@ -299,12 +266,14 @@
       grid-template-columns: 1fr 260px;
       gap: 20px;
     }
+
     main {
       background: #111;
       border: 1px solid #333;
       border-radius: 12px;
       padding: 20px;
     }
+
     main h2 {
       font-family: "Amiri", serif;
       font-size: 26px;
@@ -312,6 +281,70 @@
       color: #d0d0d0;
       border-bottom: 1px solid #444;
       padding-bottom: 8px;
+    }
+
+    .featured-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      background: #1a1a1a;
+      min-height: 220px;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      padding: 0 16px;
+    }
+
+    .carousel-btn {
+      pointer-events: auto;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: #ccc;
+      font-size: 2.2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.85);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
     }
 
     .article {
@@ -322,16 +355,19 @@
       transition: all 0.2s ease;
       cursor: pointer;
     }
+
     .article:hover {
       background: #222;
       box-shadow: 0 4px 16px rgba(255,255,255,0.06);
       transform: translateY(-2px);
     }
+
     .article-title {
       color: #ccc;
       font-size: 21px;
       margin-bottom: 8px;
     }
+
     .article-meta {
       display: flex;
       align-items: center;
@@ -339,8 +375,8 @@
       font-size: 13.5px;
       color: #aaa;
       margin-bottom: 10px;
-      font-family: system-ui, sans-serif;
     }
+
     .article-meta img { width: 14px; filter: brightness(1.4); }
 
     aside {
@@ -349,12 +385,14 @@
       border-radius: 12px;
       padding: 16px;
     }
+
     aside h3 {
       font-family: "Amiri", serif;
       font-size: 22px;
       margin-bottom: 14px;
       color: #d0d0d0;
     }
+
     .nav-item {
       padding: 10px;
       margin-bottom: 8px;
@@ -365,6 +403,7 @@
       cursor: pointer;
       color: #ccc;
     }
+
     .nav-item:hover {
       background: #222;
       box-shadow: 0 4px 12px rgba(255,255,255,0.08);
@@ -379,28 +418,25 @@
       border-top: 1px solid #333;
       color: #bbb;
       font-size: 15px;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
     }
+
     .footer-social {
       margin: 16px 0 12px;
       display: flex;
       justify-content: center;
       gap: 20px;
     }
+
     .footer-social a:hover {
-      opacity: 1;
       transform: translateY(-4px);
-      filter: drop-shadow(0 4px 12px rgba(255,255,255,0.15));
     }
+
     .footer-social img {
       width: 32px;
       height: 32px;
       filter: brightness(1.3);
     }
-    .footer-text {
-      opacity: 0.7;
-      font-size: 0.95rem;
-    }
+
     #backToTop {
       position: fixed;
       bottom: 32px;
@@ -415,12 +451,18 @@
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
-      transition: background 0.25s ease;
+      transition: all 0.25s ease;
       z-index: 999;
     }
-    #backToTop:hover { background: #444; }
+
     #backToTop.visible { opacity: 0.92; visibility: visible; }
-    #backToTop img { width: 24px; height: 24px; filter: brightness(1.3); }
+    #backToTop:hover { background: #444; }
+
+    @media (max-width: 860px) {
+      .container { grid-template-columns: 1fr; }
+      .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
+      .search-area { max-width: 100%; }
+    }
 
     /* Filter Popup */
     #filterPopup {
@@ -444,7 +486,6 @@
       overflow-y: auto;
       padding: 28px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     .filter-header {
       display: flex;
@@ -456,7 +497,6 @@
     .close-btn { background:none; border:none; color:#888; font-size:2.2rem; cursor:pointer; }
     .close-btn:hover { color:#ff7777; }
 
-    .filter-section { margin-bottom: 28px; }
     .filter-options {
       display: flex;
       flex-direction: column;
@@ -475,9 +515,7 @@
       align-items: center;
       gap: 10px;
     }
-    .filter-group-title:hover {
-      background: #2a2a2a;
-    }
+    .filter-group-title:hover { background: #2a2a2a; }
     .filter-sub-item {
       padding: 8px 14px 8px 32px;
       color: #ccc;
@@ -491,14 +529,7 @@
       background: #222;
       color: #fff;
     }
-
-    /* Smaller icons in filtering dropdown */
-    .filter-group-title img,
-    .filter-sub-item img {
-      width: 14px !important;
-      height: 14px !important;
-      filter: brightness(1.4);
-    }
+    .filter-sub-item img { width: 14px; height: 14px; filter: brightness(1.4); }
 
     .filter-actions {
       display: flex;
@@ -515,15 +546,6 @@
     }
     .filter-btn.clear { background: #333; color: #ddd; }
     .filter-btn.apply { background: #444; color: white; }
-
-    @media (max-width: 860px) {
-      .container { grid-template-columns: 1fr; }
-      .header-title img { width: 220px; }
-      .nav-left { flex-wrap: wrap; gap: 16px; font-size: 0.9rem; justify-content: center; }
-      .search-area { max-width: 100%; }
-      #backToTop { bottom: 24px; right: 20px; width: 40px; height: 40px; }
-      #backToTop img { width: 22px; height: 22px; }
-    }
   </style>
 </head>
 <body>
@@ -599,16 +621,16 @@
 
     <div class="topbar-right">
       <div class="social-icons">
-        <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+        <a href="https://discord.com/users/1401569195388440637" target="_blank">
           <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
         </a>
-        <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank">
           <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
         </a>
-        <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.youtube.com/@hamelaalhuda" target="_blank">
           <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
         </a>
-        <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+        <a href="https://t.me/hamelalhuda" target="_blank">
           <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
         </a>
       </div>
@@ -640,8 +662,8 @@
       <div class="featured-carousel" id="featuredCarousel">
         <div class="carousel-inner" id="carouselInner"></div>
         <div class="carousel-controls">
-          <button class="carousel-btn prev" id="prevBtn">‹</button>
-          <button class="carousel-btn next" id="nextBtn">›</button>
+          <button class="carousel-btn prev" id="prevBtn" aria-label="Previous">‹</button>
+          <button class="carousel-btn next" id="nextBtn" aria-label="Next">›</button>
         </div>
       </div>
       <div class="articles-grid" id="articlesGrid"></div>
@@ -719,26 +741,24 @@
 
   <footer>
     <div class="footer-social">
-      <a href="https://discord.com/users/1401569195388440637" target="_blank" rel="noopener noreferrer">
+      <a href="https://discord.com/users/1401569195388440637" target="_blank">
         <img src="https://raw.githubusercontent.com/millahibrahim148-ops/Al-Istibanah/refs/heads/main/icon%20image/discord-white-icon.webp" alt="Discord">
       </a>
-      <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/hamelal.hudaa/" target="_blank">
         <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/instagram-white-icon.webp" alt="Instagram">
       </a>
-      <a href="https://www.youtube.com/@hamelaalhuda" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.youtube.com/@hamelaalhuda" target="_blank">
         <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/youtube-app-white-icon.webp" alt="YouTube">
       </a>
-      <a href="https://t.me/hamelalhuda" target="_blank" rel="noopener noreferrer">
+      <a href="https://t.me/hamelalhuda" target="_blank">
         <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/telegram-xxl.png" alt="Telegram">
       </a>
     </div>
-    <div class="footer-text">
-      © حامل الهداة
-    </div>
+    <div class="footer-text">© حامل الهداة</div>
   </footer>
 
   <div id="backToTop" title="Back to top">
-    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/arrow-up-6-xxl.png" alt="Back to top">
+    <img src="https://raw.githubusercontent.com/hamelal/hamelal.github.io/main/articles/arrow-up-6-xxl.png" alt="↑">
   </div>
 
   <script>
@@ -767,8 +787,24 @@
         chip.querySelector('.remove').onclick = () => chip.remove();
         tokenfield.insertBefore(chip, tokenInput);
         tokenInput.value = '';
-        tokenInput.focus();
       }
+
+      // Enter → redirect to search.html
+      tokenInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const q = tokenInput.value.trim();
+          if (!q && selectedFilters.size === 0) return;
+
+          const params = new URLSearchParams();
+          if (q) params.set('q', q);
+          if (selectedFilters.size > 0) {
+            params.set('filters', Array.from(selectedFilters).join(','));
+          }
+
+          window.location.href = `/search.html?${params.toString()}`;
+        }
+      });
 
       filterToggle.addEventListener('click', e => {
         e.stopPropagation();
@@ -791,8 +827,8 @@
           if (selectedFilters.has(name)) {
             selectedFilters.delete(name);
             item.classList.remove('active');
-            document.querySelectorAll('.chip').forEach(chip => {
-              if (chip.textContent.includes(name)) chip.remove();
+            document.querySelectorAll('.chip').forEach(c => {
+              if (c.textContent.includes(name)) c.remove();
             });
           } else {
             selectedFilters.add(name);
@@ -802,13 +838,10 @@
         });
       });
 
-      // Apply Filters → apply + close popup
       applyFilterBtn.addEventListener('click', () => {
-        // You can add any extra apply logic here if needed
         filterPopup.classList.remove('active');
       });
 
-      // Clear Filters → clear + close popup
       clearFiltersBtn.addEventListener('click', () => {
         selectedFilters.clear();
         document.querySelectorAll('.filter-group-title, .filter-sub-item').forEach(opt => opt.classList.remove('active'));
@@ -821,6 +854,89 @@
           filterPopup.classList.remove('active');
         }
       });
+
+      // Carousel & articles
+      let allArticles = [];
+      fetch("/articles.json")
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(articles => {
+          allArticles = articles;
+          renderArticles(articles);
+        })
+        .catch(() => {
+          document.getElementById("articlesGrid").innerHTML = "<p style='text-align:center;color:#777;'>No articles loaded</p>";
+        });
+
+      function renderArticles(articles) {
+        const grid = document.getElementById("articlesGrid");
+        const carouselInner = document.getElementById("carouselInner");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        grid.innerHTML = "";
+        carouselInner.innerHTML = "";
+
+        if (articles.length === 0) {
+          grid.innerHTML = "<p style='text-align:center;color:#777;padding:3rem 0;'>No articles</p>";
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          return;
+        }
+
+        // Featured carousel
+        const featured = articles.slice(0, 3);
+        featured.forEach(a => {
+          const item = document.createElement("div");
+          item.className = "carousel-item";
+          item.innerHTML = `
+            <div class="article-title">${a.title || "No title"}</div>
+            <div class="article-meta">
+              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" alt="">
+              <span>${a.date || ""}</span>
+            </div>
+            <p class="article-excerpt">${a.excerpt || ""}</p>
+          `;
+          if (a.file) item.onclick = () => window.location = a.file;
+          carouselInner.appendChild(item);
+        });
+
+        let currentIndex = 0;
+        const total = featured.length;
+
+        function showSlide(idx) {
+          carouselInner.style.transform = `translateX(-${idx * 100}%)`;
+          currentIndex = idx;
+          prevBtn.disabled = idx === 0;
+          nextBtn.disabled = idx === total - 1;
+        }
+
+        if (total > 0) {
+          prevBtn.onclick = () => { if (currentIndex > 0) showSlide(currentIndex - 1); };
+          nextBtn.onclick = () => { if (currentIndex < total - 1) showSlide(currentIndex + 1); };
+          prevBtn.disabled = true;
+          nextBtn.disabled = total <= 1;
+          if (total > 1) setInterval(() => {
+            if (currentIndex < total - 1) showSlide(currentIndex + 1);
+            else showSlide(0);
+          }, 6000);
+        }
+
+        // Grid
+        articles.slice(3).forEach(a => {
+          const div = document.createElement("div");
+          div.className = "article";
+          div.innerHTML = `
+            <div class="article-title">${a.title || "No title"}</div>
+            <div class="article-meta">
+              <img src="https://raw.githubusercontent.com/millahibrahim148-ops/almaymunah/refs/heads/main/icon%20image/2226-calendar.png" alt="">
+              <span>${a.date || ""}</span>
+            </div>
+            <p>${a.excerpt || ""}</p>
+          `;
+          if (a.file) div.onclick = () => window.location = a.file;
+          grid.appendChild(div);
+        });
+      }
 
       // Back to top
       window.addEventListener("scroll", () => {
